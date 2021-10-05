@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<title>Find Shinchan</title>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/myStyle.css') }}"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}"  media="screen,projection"/>
+		<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/mine.css') }}"  media="screen,projection"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	</head>
+	<body onload=createShinchan()>
+	<div class ="row">
+	<h5>FIND Shinchan</h5>
+	<h5>Click on the extra image which is present on the left side</h5>
+	</div>
+	<div class ="row">
+	<h6>Your Score:<div id="showCount"></div></h6>
+	</div>
+	<div class ="row">
+	<div id="west" class="size" ></div>
+	<div id="east" class="size pos"></div>
+	</div>
+</div>
+	<script>
+	var shinchanCount=5, counter=0, totalScore = document.getElementById("showCount"), bodyid = document.getElementsByTagName("body")[0];
+	var west = document.getElementById("west"), east = document.getElementById("east");
+			
+function createShinchan()
+{
+	var i=1;
+	while(i<=shinchanCount)
+	{
+		var bodyid = document.getElementById("bodyid");
+		var imgid=document.createElement("img");
+		imgid.style.left = Math.random() * 600, imgid.style.top = Math.random() * 400, imgid.src="static/images/shinchan.png";
+		west.appendChild(imgid);
+		i++;
+	}
+	var createEastImage=west.cloneNode(true);
+	createEastImage.removeChild(createEastImage.lastChild);
+	east.appendChild(createEastImage);
+	totalScore.innerHTML=counter;
+	west.lastChild.onclick=function nextLevel(event){
+					event.stopPropagation();
+					shinchanCount = shinchanCount+5;
+					counter=counter+1;
+					createShinchan();
+					};
+}				
+bodyid.onclick = function gameOver() {
+alert("GAME OVER! Reload Page");
+bodyid.onclick = null;
+};
+</script>
+	</body>
+</html>
